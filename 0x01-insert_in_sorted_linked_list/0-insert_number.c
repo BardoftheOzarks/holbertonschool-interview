@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 /**
  * insert_node - inserts a node into a sorted linked list
  * @head: head of the list
