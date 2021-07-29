@@ -8,12 +8,24 @@
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *scanner = *head, *new = malloc(sizeof(listint_t));
+	listint_t *scanner, *new;
 
+	scanner = *head;
+	new = malloc(sizeof(listint_t));
+	if (new == NULL)
+		return (NULL);
 	new->n = number;
-	while (scanner->next && scanner->next->n < number)
-		scanner = scanner->next;
-	new->next = scanner->next;
-	scanner->next = new;
+	if (!scanner || scanner->n >= number)
+	{
+		new->next = scanner;
+		*head = new;
+	}
+	else
+	{
+		while (scanner->next && scanner->next->n < number)
+			scanner = scanner->next;
+		new->next = scanner->next;
+		scanner->next = new;
+	}
 	return (new);
 }
