@@ -62,15 +62,14 @@ int height(heap_t *tree)
  */
 void swap_parent(heap_t *promotee)
 {
-	/*int holder = promotee->n;*/
-	heap_t *demotee;
+
+	heap_t *demotee, *lower_left, *lower_right;
 
 	if (promotee->parent == NULL)
 		return;
 	demotee = promotee->parent;
-	/*Variables to store pointers*/
-	heap_t *lower_left = promotee->left, *lower_right = promotee->right;
-
+	lower_left = promotee->left;
+	*lower_right = promotee->right;
 	/*Swap parent pointers*/
 	promotee->parent = demotee->parent;
 	if (demotee->parent)
