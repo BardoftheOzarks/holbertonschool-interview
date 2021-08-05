@@ -68,13 +68,7 @@ void swap_parent(heap_t *promotee)
 	if (promotee->parent == NULL)
 		return;
 	demotee = promotee->parent;
-	/*if (promotee->n > demotee->n)
-	{
-		promotee->n = demotee->n;
-		demotee->n = holder;
-		swap_parent(demotee);
-	}
-	Variables to store pointers*/
+	/*Variables to store pointers*/
 	heap_t *lower_left = promotee->left, *lower_right = promotee->right;
 
 	/*Swap parent pointers*/
@@ -123,43 +117,35 @@ heap_t *traverse(heap_t *root, int value)
 
 	/*end placements for new nodes*/
 	if (!root)
-	{
-		root = binary_tree_node(NULL, value);
+	{	root = binary_tree_node(NULL, value);
 		if (!root)
 			return (NULL);
 		return (root);
 	}
 	if (!root->left && !root->right)
-	{
-		root->left = binary_tree_node(root, value);
+	{	root->left = binary_tree_node(root, value);
 		if (!root->left)
 			return (NULL);
 		return (root->left);
 	}
 	if (root->left && !root->right)
-	{
-		root->right = binary_tree_node(root, value);
+	{	root->right = binary_tree_node(root, value);
 		if (!root->right)
 			return (NULL);
 		return (root->right);
 	}
 	/*traversal navigation for full nodes*/
 	if (root->left && root->right)
-	{
-		lcount = nodes(root->left);
+	{	lcount = nodes(root->left);
 		lheight = height(root->left);
 		rcount = nodes(root->right);
 		rheight = height(root->right);
-		/* New row */
 		if (lcount == rcount && lheight == rheight)
 			target = traverse(root->left, value);
-		/* start right branch */
 		else if (lheight > rheight && lcount - 1 == rcount * 2)
 			target = traverse(root->right, value);
-		/*fill in left branch*/
 		else if (lheight > rheight && lcount < (rcount * 2))
 			target = traverse(root->left, value);
-		/*fill in right branch*/
 		else if (lheight == rheight && lcount > rcount)
 			target = traverse(root->right, value);
 		return (target);
