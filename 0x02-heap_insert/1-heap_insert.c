@@ -19,9 +19,10 @@ heap_t *heap_insert(heap_t **root, int value)
 		swap_parent(new);
 	/*check and adjust if new root node*/
 	if (*root == NULL)
-		*root = new;
-	while ((*root)->parent)
-		*root = (*root)->parent;
+		(*root) = new;
+	if ((*root)->parent)
+		while ((*root)->parent != NULL)
+			*root = (*root)->parent;
 	return (new);
 }
 
@@ -61,23 +62,23 @@ int height(heap_t *tree)
  */
 void swap_parent(heap_t *promotee)
 {
-	int holder = promotee->n;
+	/*int holder = promotee->n;*/
 	heap_t *demotee;
 
 	if (promotee->parent == NULL)
 		return;
 	demotee = promotee->parent;
-	if (promotee->n > demotee->n)
+	/*if (promotee->n > demotee->n)
 	{
 		promotee->n = demotee->n;
 		demotee->n = holder;
 		swap_parent(demotee);
 	}
-	/*Variables to store pointers*/
-/*	heap_t *lower_left = promotee->left, *lower_right = promotee->right;
+	Variables to store pointers*/
+	heap_t *lower_left = promotee->left, *lower_right = promotee->right;
 
-	Swap parent pointers*/
-/*	promotee->parent = demotee->parent;
+	/*Swap parent pointers*/
+	promotee->parent = demotee->parent;
 	if (demotee->parent)
 	{
 		if (promotee->parent->left == demotee)
@@ -86,26 +87,27 @@ void swap_parent(heap_t *promotee)
 			promotee->parent->right = promotee;
 	}
 	demotee->parent = promotee;
-	Swap left pointers*/
-/*	if (demotee->left && demotee->left != promotee)
+	/*Swap left pointers*/
+	if (demotee->left && demotee->left != promotee)
 	{
 		promotee->left = demotee->left;
 		promotee->left->parent = promotee;
-	} else
+	} else if (demotee->left && demotee->left == promotee)
 		promotee->left = demotee;
 	demotee->left = lower_left;
-	Swap right pointers as needed*/
-/*	if (demotee->right)
+	/*Swap right pointers as needed*/
+	if (demotee->right)
 	{
 		if (demotee->right != promotee)
 		{
 			promotee->right = demotee->right;
 			promotee->right->parent = promotee;
-		} else
+		} else if (demotee->right == promotee)
 			promotee->right = demotee;
 	}
 	demotee->right = lower_right;
-*/
+	if (promotee->parent && promotee->parent->n < promotee->n)
+		swap_parent(promotee);
 }
 
 /**
