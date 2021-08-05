@@ -9,15 +9,11 @@
 heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new;
-	int current_root;
 
-	if (*root)
-	{
-		current_root = (*root)->n;
-		printf("Current root: %d\n", current_root);
-	}
 	/*traverse by level for next available slot*/
 	new = traverse(*root, value);
+	if (!new)
+		return (NULL);
 	/*loop: compare with parent, swap as needed*/
 	if (new->parent && new->parent->n < new->n)
 		swap_parent(new);
@@ -127,16 +123,22 @@ heap_t *traverse(heap_t *root, int value)
 	if (!root)
 	{
 		root = binary_tree_node(NULL, value);
+		if (!root)
+			return (NULL);
 		return (root);
 	}
 	if (!root->left && !root->right)
 	{
 		root->left = binary_tree_node(root, value);
+		if (!root->left)
+			return (NULL);
 		return (root->left);
 	}
 	if (root->left && !root->right)
 	{
 		root->right = binary_tree_node(root, value);
+		if (!root->right)
+			return (NULL);
 		return (root->right);
 	}
 	/*traversal navigation for full nodes*/
