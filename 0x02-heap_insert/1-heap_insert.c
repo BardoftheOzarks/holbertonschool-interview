@@ -69,7 +69,7 @@ void swap_parent(heap_t *promotee)
 		return;
 	demotee = promotee->parent;
 	lower_left = promotee->left;
-	*lower_right = promotee->right;
+	lower_right = promotee->right;
 	/*Swap parent pointers*/
 	promotee->parent = demotee->parent;
 	if (demotee->parent)
