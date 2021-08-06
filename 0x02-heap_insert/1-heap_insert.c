@@ -23,7 +23,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	/*check and adjust if new root node*/
 	if ((*root)->parent)
 		while ((*root)->parent)
-		*root = (*root)->parent;
+			*root = (*root)->parent;
 	return (new);
 }
 
@@ -63,45 +63,18 @@ int height(heap_t *tree)
  */
 void swap_parent(heap_t *promotee)
 {
+	int hold;
+	heap_t *demotee;
 
-	heap_t *demotee, *lower_left, *lower_right;
-
-	if (promotee->parent == NULL)
+	if (!promotee || !promotee->parent)
 		return;
-	demotee = promotee->parent;
-	lower_left = promotee->left;
-	lower_right = promotee->right;
-	/*Swap parent pointers*/
-	promotee->parent = demotee->parent;
-	if (demotee->parent)
+	while (promotee->parent && promotee->parent->n < promotee->n)
 	{
-		if (promotee->parent->left == demotee)
-			promotee->parent->left = promotee;
-		if (promotee->parent->right == demotee)
-			promotee->parent->right = promotee;
+		demotee = promotee->parent;
+		hold = demotee->n;
+		demotee->n = promotee->n;
+		promotee->n = hold;
 	}
-	demotee->parent = promotee;
-	/*Swap left pointers*/
-	if (demotee->left && demotee->left != promotee)
-	{
-		promotee->left = demotee->left;
-		promotee->left->parent = promotee;
-	} else if (demotee->left && demotee->left == promotee)
-		promotee->left = demotee;
-	demotee->left = lower_left;
-	/*Swap right pointers as needed*/
-	if (demotee->right)
-	{
-		if (demotee->right != promotee)
-		{
-			promotee->right = demotee->right;
-			promotee->right->parent = promotee;
-		} else if (demotee->right == promotee)
-			promotee->right = demotee;
-	}
-	demotee->right = lower_right;
-	if (promotee->parent && promotee->parent->n < promotee->n)
-		swap_parent(promotee);
 }
 
 /**
