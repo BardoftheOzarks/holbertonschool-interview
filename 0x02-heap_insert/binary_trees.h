@@ -29,7 +29,7 @@ heap_t *heap_insert(heap_t **root, int value);
 void binary_tree_print(const binary_tree_t *tree);
 /* Helper functions */
 heap_t *traverse(heap_t *root, int value);
-void swap_parent(heap_t *promotee);
+heap_t *swap_parent(heap_t *promotee);
 int nodes(heap_t *tree);
 int height(heap_t *tree);
 #endif
