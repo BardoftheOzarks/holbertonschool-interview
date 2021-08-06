@@ -75,6 +75,8 @@ heap_t *swap_parent(heap_t *promotee)
 		demotee->n = promotee->n;
 		promotee->n = hold;
 	}
+	if (demotee->parent && demotee->parent->n < demotee->n)
+		demotee = swap_parent(demotee);
 	return (demotee);
 }
 
