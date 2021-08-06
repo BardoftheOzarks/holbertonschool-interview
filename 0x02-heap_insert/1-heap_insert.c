@@ -10,19 +10,20 @@ heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new;
 
+	if (!*root)
+	{
+		*root = binary_tree_node(*root, value);
+		return (*root);
+	}
 	/*traverse by level for next available slot*/
 	new = traverse(*root, value);
-	if (!new)
-		return (NULL);
 	/*loop: compare with parent, swap as needed*/
 	if (new->parent && new->parent->n < new->n)
 		swap_parent(new);
 	/*check and adjust if new root node*/
-	if (*root == NULL)
-		(*root) = new;
 	if ((*root)->parent)
-		while ((*root)->parent != NULL)
-			*root = (*root)->parent;
+		while ((*root)->parent)
+		*root = (*root)->parent;
 	return (new);
 }
 
@@ -111,7 +112,6 @@ void swap_parent(heap_t *promotee)
  */
 heap_t *traverse(heap_t *root, int value)
 {
-	heap_t *target;
 	int lcount, rcount, lheight, rheight;
 
 	/*end placements for new nodes*/
@@ -121,13 +121,13 @@ heap_t *traverse(heap_t *root, int value)
 			return (NULL);
 		return (root);
 	}
-	if (!root->left && !root->right)
+	if (!root->left)
 	{	root->left = binary_tree_node(root, value);
 		if (!root->left)
 			return (NULL);
 		return (root->left);
 	}
-	if (root->left && !root->right)
+	if (!root->right)
 	{	root->right = binary_tree_node(root, value);
 		if (!root->right)
 			return (NULL);
@@ -140,14 +140,13 @@ heap_t *traverse(heap_t *root, int value)
 		rcount = nodes(root->right);
 		rheight = height(root->right);
 		if (lcount == rcount && lheight == rheight)
-			target = traverse(root->left, value);
-		else if (lheight > rheight && lcount - 1 == rcount * 2)
-			target = traverse(root->right, value);
-		else if (lheight > rheight && lcount < (rcount * 2))
-			target = traverse(root->left, value);
-		else if (lheight == rheight && lcount > rcount)
-			target = traverse(root->right, value);
-		return (target);
+			return (traverse(root->left, value));
+		if (lheight > rheight && lcount > rcount * 2)
+			return (traverse(root->right, value));
+		if (lheight > rheight && lcount < rcount * 2)
+			return (traverse(root->left, value));
+		if (lheight == rheight && lcount > rcount)
+			return (traverse(root->right, value));
 	}
-	return (NULL);
+	return (traverse(root->left, value));
 }
