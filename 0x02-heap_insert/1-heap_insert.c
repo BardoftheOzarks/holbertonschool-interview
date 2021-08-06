@@ -19,7 +19,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	new = traverse(*root, value);
 	/*loop: compare with parent, swap as needed*/
 	if (new->parent && new->parent->n < new->n)
-		swap_parent(new);
+		new = swap_parent(new);
 	/*check and adjust if new root node*/
 	if ((*root)->parent)
 		while ((*root)->parent)
@@ -61,13 +61,13 @@ int height(heap_t *tree)
  * swap_parent - replaces a new node with the parent node
  * @promotee: child node to swap with parent
  */
-void swap_parent(heap_t *promotee)
+heap_t *swap_parent(heap_t *promotee)
 {
 	int hold;
 	heap_t *demotee;
 
 	if (!promotee || !promotee->parent)
-		return;
+		return (NULL);
 	while (promotee->parent && promotee->parent->n < promotee->n)
 	{
 		demotee = promotee->parent;
@@ -75,6 +75,7 @@ void swap_parent(heap_t *promotee)
 		demotee->n = promotee->n;
 		promotee->n = hold;
 	}
+	return (demotee);
 }
 
 /**
