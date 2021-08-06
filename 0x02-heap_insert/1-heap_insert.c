@@ -60,6 +60,7 @@ int height(heap_t *tree)
 /**
  * swap_parent - replaces a new node with the parent node
  * @promotee: child node to swap with parent
+ * Return: node that the original int was transferred to.
  */
 heap_t *swap_parent(heap_t *promotee)
 {
