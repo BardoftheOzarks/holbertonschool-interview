@@ -6,7 +6,7 @@ Calculates the minimum number of CopyAll and Paste operations to make n chars
 
 def minOperations(n):
     '''Finds the minimum number of operations'''
-    if type(n) is not int:
+    if type(n) is not int or n < 2:
         return 0
     if isprime(n):
         return n
