@@ -14,18 +14,22 @@ def minOperations(n):
     opcount = 0
     chars = n
     check = 1
+    i = 2
 
-    while not isprime(chars):
-        for i in range(2, int(chars / 2) + 1):
-            # check for potential prime factors
-            if chars % i == 0 and isprime(i):
-                factors.append(i)
-                chars //= i
+    while i < (int(chars / 2) + 1):
+        # check for potential prime factors
+        if chars % i == 0 and isprime(i):
+            factors.append(i)
+            chars //= i
+            if isprime(chars):
+                factors.append(chars)
+        else:
+            i += 1
     for factor in factors:
         opcount += factor  # add all prime factors together for min ops
         check *= factor
-    if check < n:  # check for missing duplicate factor
-        opcount += chars
+    if check != n:  # check for missing duplicate factor
+        print("Duplicate factors missing")
     return opcount
 
 
