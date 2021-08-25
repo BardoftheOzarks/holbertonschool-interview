@@ -9,7 +9,8 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *current = *head;
 	int index = 0, max = loop_check(*head);
-	int size = (max / 2) - 1, array[size];
+	int size = (max / 2) - 1;
+	int array[size];
 
 	if (max == -1 || !head)
 		return (0);
