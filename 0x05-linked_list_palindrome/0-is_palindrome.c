@@ -9,13 +9,12 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *current = *head;
 	int index = 0, max = loop_check(*head);
+	int array[(max / 2) - 1];
 
 	if (max == -1 || !head)
 		return (0);
 	if (!*head)
 		return (1);
-	int size = (max / 2) + 1;
-	int array[size];
 	while (index <= max / 2)
 	{
 		array[index] = current->n;
