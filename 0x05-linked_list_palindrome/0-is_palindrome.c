@@ -8,14 +8,16 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *current = *head;
-	int index = 0, max = loop_check(*head);
-	int size = (max / 2) - 1;
-	int array[size];
+	int *array, index = 0, max;
 
+	max = loop_check(*head);
 	if (max == -1 || !head)
 		return (0);
 	if (!*head)
 		return (1);
+	array = malloc(sizeof(int) * (max / 2) + 1);
+	if (array == NULL)
+		return (0);
 	while (index <= max / 2)
 	{
 		array[index] = current->n;
@@ -28,9 +30,13 @@ int is_palindrome(listint_t **head)
 	{
 		index--;
 		if (array[index] != current->n)
+		{
+			free(array);
 			return (0);
+		}
 		current = current->next;
 	}
+	free(array);
 	return (1);
 }
 
