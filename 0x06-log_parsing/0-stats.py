@@ -18,10 +18,11 @@ class parsley:
         for line in sys.stdin:
             if len(line) > 30:
                 line = line.split()
-                if line[-1].isnumeric() and line[-2].isnumeric():
+                if line[-1].isnumeric():
                     self.size += int(line[-1])
+                if line[-2].isnumeric():
                     self.totals[line[-2]] += 1
-                    count += 1
+                count += 1
                 if count % 10 == 0:
                     self.parler()
 
