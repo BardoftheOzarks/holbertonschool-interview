@@ -2,6 +2,7 @@
 """Parses a log of status codes with Pirates of the Caribbean references"""
 import sys
 
+
 class parsley:
     '''Methods and values for log parsing and flavor'''
 
@@ -14,12 +15,13 @@ class parsley:
     def parsnip(self):
         '''snips the log into firewood pieces'''
         count = 0
-        for line in sys. stdin:
+        for line in sys.stdin:
             if line != '':
                 line = line.split()
-                self.size += int(line[-1])
-                self.totals[line[-2]] += 1
-                count += 1
+                if line[-1].isnumeric() and line[-2].isnumeric():
+                    self.size += int(line[-1])
+                    self.totals[line[-2]] += 1
+                    count += 1
                 if count % 10 == 0:
                     self.parler()
 
@@ -34,5 +36,6 @@ if __name__ == '__main__':
     log = parsley()
     try:
         log.parsnip()
+        log.parler()
     except KeyboardInterrupt:
         log.parler()
