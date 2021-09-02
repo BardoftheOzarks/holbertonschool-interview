@@ -16,7 +16,7 @@ class parsley:
         '''snips the log into firewood pieces'''
         count = 0
         for line in sys.stdin:
-            if line != '':
+            if len(line) > 30:
                 line = line.split()
                 if line[-1].isnumeric() and line[-2].isnumeric():
                     self.size += int(line[-1])
