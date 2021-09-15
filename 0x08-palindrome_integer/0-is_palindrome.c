@@ -10,6 +10,8 @@ int is_palindrome(unsigned long n)
 	unsigned long x = n;
 	listint_t *head = NULL, *tail = NULL, *current = NULL;
 
+	if (n < 10)
+		return (1);
 	while (x > 0)
 	{
 		tail = add_node(&tail, x % 10);
