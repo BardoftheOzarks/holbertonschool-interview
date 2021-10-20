@@ -29,6 +29,7 @@ def isSafe(board, row, col):
         x -= 1
     return True
 
+
 def placement(board, col):
     '''Places the next queen'''
     if col >= N:
@@ -47,6 +48,7 @@ def placement(board, col):
             res = placement(board, col + 1) or res
             board[i][col] = 0
     return res
+
 
 def nqueens(N):
     '''Main function'''
