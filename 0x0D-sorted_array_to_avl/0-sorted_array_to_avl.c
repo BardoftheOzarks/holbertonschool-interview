@@ -12,6 +12,8 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	int left = 0, right = size - 1;
 
 	root = make_tree(root, array, left, right);
+	if (!root)
+		return (NULL);
 	return (root);
 }
 
@@ -32,6 +34,8 @@ avl_t *make_tree(avl_t *parent, int *array, int left, int right)
 		return (NULL);
 
 	new = new_node(array[placement], parent);
+	if (!new)
+		return (NULL);
 
 	new->left = make_tree(new, array, left, placement - 1);
 	new->right = make_tree(new, array, placement + 1, right);
