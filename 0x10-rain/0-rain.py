@@ -9,26 +9,26 @@ def rain(walls):
     total = 0
     index = 0
 
-    if (len(walls) > 3):
-        right = 0
+    if (len(walls) > 2):
+        right = -1
         sub = 0
         while (index < len(walls)):
             if (walls[index] > 0):
-                if (right == 0):
-                    right = walls[index]
-                    r_index = index
+                if (right < 0):
+                    right = index
                 else:
-                    left = walls[index]
-                    width = index - r_index - 1
-                    if (left >= right):
-                        total += (right * width) - sub
+                    left = index
+                    width = left - right - 1
+                    if (walls[left] >= walls[right]):
+                        total += (walls[right] * width) - sub
                         right = left
                         left = 0
-                        r_index = index
                         sub = 0
+                    elif (walls[left] * width < sub):
+                        sub += walls[left]
                     else:
-                        total += (left * width) - sub
-                        sub += ((left * width) - sub) + left
+                        total += (walls[left] * width) - sub
+                        sub += ((walls[left] * (width + 1)) - sub)
 
             index += 1
 
