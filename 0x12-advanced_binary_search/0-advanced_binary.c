@@ -2,7 +2,7 @@
 
 
 /**
- * advanced_binary - search for the first occurance of a value in a sorted array
+ * advanced_binary - search for the first element of a value in a sorted array
  * @array: an array of ints
  * @size: number of elements in array
  * @value: value to search for
@@ -44,7 +44,7 @@ int binary_search(int *array, size_t size, int left, int right, int value)
 	int mid;
 
 	print_array(array, left, right);
-	if (right > left)
+	if (array[left] && array[right] && right > left)
 	{
 		mid = left + (right - left) / 2;
 		if (array[mid] == value)
@@ -67,7 +67,8 @@ int binary_search(int *array, size_t size, int left, int right, int value)
 /**
  * print_array - prints an array of ints
  * @array: an array of ints
- * @size: number of elements in array
+ * @left: leftmost index to print
+ * @right: rightmost index to print
  */
 void print_array(int *array, int left, int right)
 {
