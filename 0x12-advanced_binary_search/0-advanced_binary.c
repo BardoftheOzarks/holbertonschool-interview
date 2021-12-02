@@ -13,8 +13,6 @@ int advanced_binary(int *array, size_t size, int value)
 	int left = 0, right = size - 1, result;
 
 	result = binary_search(array, size, left, right, value);
-	//if (result > 0 && array[result - 1] == value)
-		//return (backtrack(array, result - 1, value));
 	return (result);
 }
 
