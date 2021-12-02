@@ -10,11 +10,14 @@
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	int left = 0, right = size - 1, result = -1;
+	int left = 0, right, result = -1;
 
-	if (*array)
+	if (size)
+	{
+		right = size - 1;
 		result = binary_search(array, size, left, right, value);
-	return (result);
+	}
+		return (result);
 }
 
 /**
