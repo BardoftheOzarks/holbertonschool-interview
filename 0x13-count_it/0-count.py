@@ -8,12 +8,13 @@ def count_words(subreddit, word_list, after=None, counts={}):
     if after is not None:
         url = 'https://api.reddit.com/r/{}/hot.json?after={}'.format(subreddit,
                                                                      after)
-        for word in word_list:
-            word = word.lower()
-            if word not in counts.keys():
-                counts[word] = 0
     else:
         url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+        lower_list = (map(lambda word: word.lower(), word_list))
+        word_list = list(lower_list)
+        for word in word_list:
+            if word not in counts.keys():
+                counts[word] = 0
     headers = {'User-Agent': 'user'}
     r = requests.get(url, headers=headers, allow_redirects=False)
     try:
@@ -22,10 +23,11 @@ def count_words(subreddit, word_list, after=None, counts={}):
         return
     children = data.get('children')
     for child in children:
-        title = (child.get('data').get('title').lower())
+        title = child.get('data').get('title').lower()
         title = title.split(' ')
-        for word in counts.keys():
-            counts[word] += title.count(word)
+        for word in title:
+            if word in word_list:
+                counts[word] += 1
     after = data.get('after')
     if after is not None:
         return count_words(subreddit, word_list, after, counts)
