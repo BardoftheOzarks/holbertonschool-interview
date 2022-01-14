@@ -1,5 +1,7 @@
 #include "binary_trees.h"
 
+void binary_tree_print(const binary_tree_t *tree);
+
 /**
  * heap_extract - extracts the root node of a Max Binary Heap
  * @root: root node of the heap
@@ -16,7 +18,7 @@ int heap_extract(heap_t **root)
 	delete = *root;
 	num = (*root)->n;
 
-	if (!delete->left && !delete->right)
+	if (!delete->left && !delete->right && !delete->parent)
 	{
 		*root = NULL;
 		free(delete);
@@ -28,8 +30,6 @@ int heap_extract(heap_t **root)
 			delete = swap(delete, delete->left);
 		else
 			delete = swap(delete, delete->right);
-		while ((*root)->parent)
-			*root = (*root)->parent;
 		return (heap_extract(&delete));
 	}
 	else if (delete->left)
