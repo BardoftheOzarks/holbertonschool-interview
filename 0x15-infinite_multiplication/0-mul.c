@@ -63,9 +63,7 @@ void mul(char *num1, char *num2)
 			digit = product % 10;
 			carry = product / 10;
 			if (total[k] == '0')
-			{
 				total[k] += digit;
-			}
 			else
 			{
 				digit += total[k] - '0';
