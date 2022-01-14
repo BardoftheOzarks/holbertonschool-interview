@@ -3,6 +3,7 @@
 Rotates a 2D matrix clockwise by 90 degrees
 '''
 
+
 def rotate_2d_matrix(matrix):
     '''Spin the wheel...or matrix'''
     size = len(matrix)
@@ -12,8 +13,8 @@ def rotate_2d_matrix(matrix):
     for row in range(len(matrix)):
         for col in range(len(matrix)):
             if col > row:
-                (matrix[row][col], matrix[col][row]) =\
-                (matrix[col][row], matrix[row][col])
+                (matrix[row][col], matrix[col][row])\
+                    = (matrix[col][row], matrix[row][col])
     '''flip horizontally'''
     for row in matrix:
         size = len(matrix) - 1
