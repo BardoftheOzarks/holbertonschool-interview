@@ -47,7 +47,6 @@ void mul(char *num1, char *num2)
 	while (num2[len2])
 		len2++;
 
-	printf("%s %s\n", num1, num2);
 	total = malloc(sizeof(char) * (len1 + len2));
 	if (total == NULL)
 		exit(1);
