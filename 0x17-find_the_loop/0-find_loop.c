@@ -16,7 +16,6 @@ listint_t *find_listint_loop(listint_t *head)
 	{
 		tortoise = tortoise->next;
 		hare = hare->next->next;
-		printf("Tort: %d, Hare: %d\n", tortoise->n, hare->n);
 		if (tortoise == hare)
 		{
 			tortoise = head;
@@ -24,7 +23,6 @@ listint_t *find_listint_loop(listint_t *head)
 			{
 				tortoise = tortoise->next;
 				hare = hare->next;
-				printf("Tort: %d, Hare: %d\n", tortoise->n, hare->n);
 			}
 			return (tortoise);
 		}
