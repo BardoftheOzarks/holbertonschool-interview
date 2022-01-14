@@ -78,7 +78,7 @@ void mul(char *num1, char *num2)
 		}
 	}
 	total = digit_check(total);
-	for (i = 0; i < (len1 + len2); i++)
+	for (i = 0; total[i]; i++)
 		_putchar(total[i]);
 	_putchar('\n');
 }
