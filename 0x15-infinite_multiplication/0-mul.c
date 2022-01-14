@@ -92,6 +92,7 @@ void mul(char *num1, char *num2)
  * main - Let's begin
  * @argc: argument count
  * @argv: argument vector
+ * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
