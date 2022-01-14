@@ -23,7 +23,11 @@ char *digit_check(char *string)
 		}
 	}
 	if (offset == i)
-		return ("0");
+	{
+		_putchar('0');
+		_putchar('\n');
+		exit(0);
+	}
 	return (string + offset);
 }
 
@@ -43,16 +47,10 @@ void mul(char *num1, char *num2)
 	while (num2[len2])
 		len2++;
 
+	printf("%s %s\n", num1, num2);
 	total = malloc(sizeof(char) * (len1 + len2));
 	if (total == NULL)
 		exit(1);
-
-	if (len1 == 0 || len2 == 0)
-	{
-		_putchar('0');
-		_putchar('\n');
-		exit(0);
-	}
 
 	for (i = 0; i < (len1 + len2); i++)
 		total[i] = '0';
