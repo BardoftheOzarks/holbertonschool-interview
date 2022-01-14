@@ -16,6 +16,12 @@ int heap_extract(heap_t **root)
 	delete = *root;
 	num = (*root)->n;
 
+	if (!delete->left && !delete->right)
+	{
+		*root = NULL;
+		free(delete);
+		return (num);
+	}
 	if (delete->left && delete->right)
 	{
 		if (delete->left->n > delete->right->n)
